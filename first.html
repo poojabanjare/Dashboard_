@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color:#333333;
+      font-family: 'Poppins', sans-serif;
+
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      
+    }
+
+    #login-page, #dashboard {
+      display: none;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #login-page.active, #dashboard.active {
+      display: block;
+    }
+
+    h1 {
+        color: #4caf50;
+    }
+
+    h3 {
+        color: #2196F3;
+    }
+
+    input {
+      padding: 12px;
+      margin: 10px 0;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size:14px;
+    }
+
+    input:focus {
+    outline: none;
+    border-color: #4CAF50;
+     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+   }
+
+    button {
+      padding: 12px 20px;
+      margin:10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45A049; 
+    }
+
+    
+    
+    .chart-container {
+      margin-top: 30px;
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    } 
+
+    .sales-report {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .report-card {
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      margin: 0 10px;
+    }
+
+    .report-card h3 {
+      margin: 0;
+      font-size: 1.8em;
+      color: #333;
+    }
+
+    .report-card p {
+      margin: 5px 0 0;
+      font-size: 1em;
+      color: #555;
+    }
+
+
+    footer {
+     margin-top: 20px;
+     font-size: 14px;
+     color: #777777;
+   }
+
+   /* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+  }
+
+  #login-page, #dashboard {
+    width: 100%;
+    padding: 10px;
+  }
+
+  input, button {
+    width: 100%;
+  }
+
+  .sales-report {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .report-card {
+    margin: 10px 0;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  .report-card h3 {
+    font-size: 1.5em;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Login/Sign-Up Page -->
+  <div id="login-page" class="active">
+    <h1>Welcome to the Dashboard</h1>
+    <div id="signup-section">
+      <h3>Sign Up</h3>
+      <input type="text" id="signup-username" placeholder="Enter Username" required>
+      <input type="password" id="signup-password" placeholder="Enter Password" required>
+      <button onclick="signUp()">Sign Up</button>
+    </div>
+    <div id="login-section" style="margin-top: 20px;">
+      <h3>Login</h3>
+      <button onclick="logIn()">Log In</button>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard">
+    <h1>Interactive Data Visualization Dashboard</h1>
+    <canvas id="line-chart"></canvas>
+    <canvas id="sales-chart"></canvas>
+
+    <div class="sales-report">
+      <div class="report-card">
+        <h3 id="total-products">0</h3>
+        <p>Total Products</p>
+      </div>
+      <div class="report-card">
+        <h3 id="avg-price">0</h3>
+        <p>Average Price</p>
+      </div>
+      <div class="report-card">
+        <h3 id="total-sales">$0</h3>
+        <p>Total Sales</p>
+      </div>
+    </div>
+
+    <button onclick="logOut()">Log Out</button>
+  </div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>
